@@ -2,9 +2,15 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Layout from "./components/layout/Layout"; // Import the Layout component
+import "./styles/variables.css";
 
-import { Dashboard, GetPoints, Benefits, MyAccount, QRScanView } from "./views/index";
-
+import {
+  Dashboard,
+  GetPoints,
+  Benefits,
+  MyAccount,
+  QRScanView,
+} from "./views/index";
 
 const App = () => {
   return (
