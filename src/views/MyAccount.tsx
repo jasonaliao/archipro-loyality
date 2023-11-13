@@ -1,0 +1,1 @@
+export const MyAccount = () => <h2>MyAccount</h2>;

@@ -1,26 +1,45 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+// App.tsx - modified with <Layout>
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Layout from "./components/layout/Layout"; // Import the Layout component
 
-function App() {
+import { Dashboard, GetPoints, Benefits, MyAccount, QRScanView } from "./views/index";
+
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Layout>
+        <Routes>
+          {routes.map((route, index) => (
+            <Route key={index} path={route.path} element={route.element} />
+          ))}
+        </Routes>
+      </Layout>
+    </Router>
   );
-}
+};
 
 export default App;
+const routes = [
+  {
+    path: "/",
+    element: <Dashboard />,
+  },
+  {
+    path: "/get-points",
+    element: <GetPoints />,
+  },
+  {
+    path: "/get-points/qr-scan",
+    element: <QRScanView />,
+  },
+  {
+    path: "/benefits",
+    element: <Benefits />,
+  },
+  {
+    path: "/my-account",
+    element: <MyAccount />,
+  },
+];
