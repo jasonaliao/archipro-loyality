@@ -1,4 +1,4 @@
-import { Card, Grid, NavBar, FloatingBubble } from "antd-mobile";
+import { Card, Grid, NavBar, FloatingBubble,  } from "antd-mobile";
 
 import { useNavigate } from "react-router-dom";
 
@@ -45,7 +45,9 @@ export const GetPoints = () => {
   return (
     <div>
       <NavBar backArrow={false}>Get Points</NavBar>
-      <div>
+      <div style={{
+        padding: '0 8px'
+      }}>
         <Grid columns={1} gap={8}>
           {GetPointOptions.map((item, index) => (
             <Card

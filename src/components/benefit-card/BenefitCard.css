@@ -1,0 +1,6 @@
+.benefitCardImage{
+    height: 150px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
