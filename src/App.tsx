@@ -1,8 +1,7 @@
-// App.tsx - modified with <Layout>
-import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Layout from "./components/layout/Layout"; // Import the Layout component
 import "./styles/variables.css";
+import { UserContextProvider, user } from "./context/User";
 
 import {
   Dashboard,
@@ -15,13 +14,15 @@ import {
 const App = () => {
   return (
     <Router>
-      <Layout>
-        <Routes>
-          {routes.map((route, index) => (
-            <Route key={index} path={route.path} element={route.element} />
-          ))}
-        </Routes>
-      </Layout>
+      <UserContextProvider user={user}>
+        <Layout>
+          <Routes>
+            {routes.map((route, index) => (
+              <Route key={index} path={route.path} element={route.element} />
+            ))}
+          </Routes>
+        </Layout>
+      </UserContextProvider>
     </Router>
   );
 };
