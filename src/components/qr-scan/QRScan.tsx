@@ -32,12 +32,24 @@ export const QRScan: FC = () => {
 
   return (
     <div>
-      <div className="wrapper">
+      <div className="wrapper" style={{textAlign: 'center'}}>
         <QrScanner
           onDecode={onDecode}
           onError={(error) => console.log(error)}
           containerStyle={{ height: "100%" }}
         />
+
+        
+        <h5>QR codes examples</h5>
+
+        <div style={{display: "flex", gap: "20px", justifyContent: "center"}}>
+
+            <a href="https://ta-36.dev.archipro.co.nz/business/rylock-windows-and-doors-auckland-south/profile/business-information" target="_ap"><img src="https://ik.imagekit.io/alexap/ap-qr-code/rylock.png?updatedAt=1700177926774" width="150" alt="qr code for RyLock" /></a>
+
+            <a href="https://ta-36.dev.archipro.co.nz/business/fit/profile/business-information" target="_ap"><img src="https://ik.imagekit.io/alexap/ap-qr-code/fit-qrcode.png?updatedAt=1700177926368" width="150" alt="qr code for Fit" /></a>
+        </div>
+
+        
         <Popup
           visible={!!decodeResult}
           onMaskClick={() => setDecodeResult(null)}
