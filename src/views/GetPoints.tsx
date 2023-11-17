@@ -1,4 +1,4 @@
-import { Card, Grid, NavBar, FloatingBubble,  } from "antd-mobile";
+import { Card, Grid, NavBar, FloatingBubble } from "antd-mobile";
 
 import { useNavigate } from "react-router-dom";
 
@@ -8,9 +8,8 @@ const SCAN_QR_CODE_LINK = "/get-points/qr-scan";
 
 const GetPointOptions = [
   {
-    title: "Exclusive Access — Partner Perks with a Scan",
-    description:
-      "Unlock the privileges of ArchiPro’s elite partner network. Scan QR codes exclusively provided by our partners upon transactions or quotes, and accrue points reserved for our distinguished members",
+    title: `Check-In to earn points`,
+    description: `Explore and check into our clients' showrooms and venues. With every check-in, earn points and get closer to exclusive rewards.`,
     link: SCAN_QR_CODE_LINK,
   },
   {
@@ -29,10 +28,6 @@ const GetPointOptions = [
     description:
       "Transform your space with our curated selections. Earn points with every purchase and bring your vision to life with the best products.",
   },
-  {
-    title: `Check-In to earn points`,
-    description: `Explore and check into our clients' showrooms and venues. With every check-in, earn points and get closer to exclusive rewards.`,
-  },
 ];
 
 export const GetPoints = () => {
@@ -45,9 +40,11 @@ export const GetPoints = () => {
   return (
     <div>
       <NavBar backArrow={false}>Get Points</NavBar>
-      <div style={{
-        padding: '0 8px'
-      }}>
+      <div
+        style={{
+          padding: "0 8px",
+        }}
+      >
         <Grid columns={1} gap={8}>
           {GetPointOptions.map((item, index) => (
             <Card

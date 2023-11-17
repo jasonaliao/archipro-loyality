@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Layout from "./components/layout/Layout"; // Import the Layout component
 import "./styles/variables.css";
-import { UserContextProvider, user } from "./context/User";
+import { UserProvider } from "./context/User";
 
 import {
   Dashboard,
@@ -14,7 +14,7 @@ import {
 const App = () => {
   return (
     <Router>
-      <UserContextProvider user={user}>
+      <UserProvider>
         <Layout>
           <Routes>
             {routes.map((route, index) => (
@@ -22,7 +22,7 @@ const App = () => {
             ))}
           </Routes>
         </Layout>
-      </UserContextProvider>
+      </UserProvider>
     </Router>
   );
 };

@@ -1,43 +1,80 @@
+import React, { createContext, useReducer, useContext, Dispatch } from 'react';
+import { UserRank } from '../types/UserRank';
+import { calculateRank }  from '../utils';
 
-import React, { createContext, ReactNode, useContext } from 'react';
-
-interface UserContextProps {
-    firstName: string;
-    lastName: string;
-    email: string;
-    apPointTotal: number;
-    rank: 'Bronze' | 'Silver' | 'Gold' | 'Platinum';
-}
-export const user: UserContextProps = {
-    firstName: 'John',
-    lastName: 'Doe',
-    email: 'johndoe@johndoe.com',
-    apPointTotal: 90,
-    rank: 'Bronze',
+// Type for the state
+type UserState = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  apPointTotal: number;
+  rank: UserRank;
 };
 
-export const UserContext = createContext<UserContextProps>(user);
+// Define the actions
+type UserAction = { type: 'add-points'; payload: number };
 
+// Initial state with the type UserState
+export const initialState: UserState = {
+  firstName: 'John',
+  lastName: 'Doe',
+  email: 'johndoe@johndoe.com',
+  apPointTotal: 90,
+  rank: 1,
+};
 
-export function UserContextProvider({
-    children,
-}: {
-    user: UserContextProps;
-    children: ReactNode;
-}): JSX.Element {
-    return (
-        <UserContext.Provider value={user}>
-            {children}
-        </UserContext.Provider>
-    );
-}
+// Create contexts with the appropriate types
+export const UserStateContext = createContext<UserState>(initialState);
+export const UserDispatchContext = createContext<Dispatch<UserAction> | undefined>(undefined);
 
-export function useUser() {
-    const ctx = useContext(UserContext);
-    if (typeof ctx === 'undefined') {
-        throw new Error(
-            'useUser must be used within the provider.'
-        );
+// Reducer with UserState and UserAction types
+const userReducer = (state: UserState, action: UserAction): UserState => {
+  switch (action.type) {
+    case 'add-points': {
+      const newApPointsTotal = state.apPointTotal + action.payload;
+      const newRank = calculateRank(newApPointsTotal);
+
+      return {
+        ...state,
+        apPointTotal: newApPointsTotal,
+        rank: newRank,
+      };
     }
-    return ctx;
-}
+      
+    default:
+      throw new Error(`Unhandled action type: ${action.type}`);
+  }
+};
+
+// UserProvider component
+export const UserProvider: React.FC<{
+  children: React.ReactNode;
+}> = ({ children }) => {
+  const [state, dispatch] = useReducer(userReducer, initialState);
+
+  return (
+    <UserStateContext.Provider value={state}>
+      <UserDispatchContext.Provider value={dispatch}>
+        {children}
+      </UserDispatchContext.Provider>
+    </UserStateContext.Provider>
+  );
+};
+
+// Custom hook to use the dispatch context
+export const useUserDispatch = (): Dispatch<UserAction> => {
+  const context = useContext(UserDispatchContext);
+  if (context === undefined) {
+    throw new Error('useUserDispatch must be used within a UserProvider');
+  }
+  return context;
+};
+
+// Custom hook to use the state context
+export const useUserState = (): UserState => {
+  const context = useContext(UserStateContext);
+  if (context === undefined) {
+    throw new Error('useUserState must be used within a UserProvider');
+  }
+  return context;
+};

@@ -1,6 +1,7 @@
 import { Grid, NavBar, Tabs } from "antd-mobile";
 
 import { BenefitCard } from "../components/benefit-card/BenefitCard";
+import { UserRank } from "../types/UserRank";
 
 export const Benefits = () => {
   return (
@@ -17,6 +18,7 @@ export const Benefits = () => {
                     content={benefit.description}
                     link={benefit.link}
                     imageSrc={benefit.image}
+                    rank={benefit.rank}
                   />
                 ))}
               </Grid>
@@ -28,7 +30,21 @@ export const Benefits = () => {
   );
 };
 
-const BenefitsList = [
+
+interface BenefitCategory {
+  categoryTitle: string;
+  benefits: BenefitItem[];  
+}
+
+interface BenefitItem {
+  title: string;
+  description: string;
+  link: string;
+  image: string;
+  rank?: UserRank;
+}
+
+const BenefitsList: BenefitCategory[] = [
   {
     categoryTitle: "Popular",
     benefits: [
@@ -47,6 +63,7 @@ const BenefitsList = [
           "A free initial consultation with SWP Interiors to discuss your design needs.",
         link: "/benefits/swp-consultation",
         image: "/assets/images/swp-interiors-logo.avif",
+        
       },
       // From Services
       {
@@ -55,6 +72,7 @@ const BenefitsList = [
           "Free consultation on sustainable design for your next project with Pacific Environments.",
         link: "/benefits/pacific-environments-consult",
         image: "/assets/images/pacific-environments-logo.avif",
+        rank: 2,
       },
       // From Kitchen
       {
@@ -63,6 +81,7 @@ const BenefitsList = [
           "Receive a curated set of kitchenware essentials from Kit & Caboodle.",
         link: "/benefits/kit-caboodle-kit",
         image: "/assets/images/kit-caboodle-logo.avif",
+        rank: 2,
       },
     ],
   },
@@ -82,6 +101,7 @@ const BenefitsList = [
           "Enjoy a 20% discount on Les Mills On Demand, bringing world-class workouts to your home.",
         link: "/benefits/pacific-environment-audit",
         image: "/assets/images/lesmills.png",
+        rank: 2,
       },
       {
         title: "AA Home Insurance Safety Bonus",
@@ -89,6 +109,7 @@ const BenefitsList = [
           "Earn a 'No Claims' bonus for every year you don’t make a home insurance claim.",
         link: "/benefits/brave-architects-blueprint",
         image: "/assets/images/AA.png",
+        rank: 2,
       },
       {
         title: "Life Pharmacy Health Check",
@@ -96,6 +117,7 @@ const BenefitsList = [
           "Receive a free health check including blood pressure and BMI measurement on your birthday month.",
         link: "/benefits/designwell-styling",
         image: "/assets/images/life-pharmacy.jpeg",
+        rank: 2,
       },
       {
         title: "Architectural Photo Package",
@@ -103,6 +125,7 @@ const BenefitsList = [
           "Book a session with Mickey Ross and receive a framed photo collection of your home.",
         link: "/benefits/mickey-ross-photos",
         image: "/assets/images/mickey-ross-logo.png",
+        rank: 2,
       },
       {
         title: "Custom Furniture Discount",
@@ -110,6 +133,7 @@ const BenefitsList = [
           "Get 15% off custom furniture when you renovate with INLINE Design & Build.",
         link: "/benefits/inline-furniture",
         image: "/assets/images/inline-logo.png",
+        rank: 2,
       },
     ],
   },

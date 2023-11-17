@@ -29,7 +29,7 @@ export const BottomNav: FC = () => {
     },
     {
       key: "/get-points",
-      title: "Get Points",
+      title: "Earn Points",
       icon: <ScanCodeOutline />,
     },
     {

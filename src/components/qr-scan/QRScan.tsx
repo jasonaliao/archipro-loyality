@@ -4,29 +4,44 @@ import { QrScanner } from "@yudiel/react-qr-scanner";
 import { useNavigate } from "react-router-dom";
 import { Popup, Button, Grid } from "antd-mobile";
 import { CheckCircleFill } from "antd-mobile-icons";
+import { useUserDispatch } from "../../context/User";
+
+interface DecodeResult {
+  data: {
+    professional: {
+      id: number;
+      title: string;
+    };
+  };
+}
 
 export const QRScan: FC = () => {
-  const [showSuccess, setShowSuccess] = useState(false);
+  const [decodeResult, setDecodeResult] = useState<DecodeResult | null>(null);
   const navigate = useNavigate();
+  const dispatch = useUserDispatch();
 
   const onDecode = (result: string) => {
     // do action
-    setShowSuccess(true);
+    setDecodeResult({ data: { professional: { id: 1, title: "FORTE" } } });
   };
+
+  const onCheckIn = (callBackUrl:string) => {
+    dispatch({ type: "add-points", payload: 10 });
+    navigate(callBackUrl);
+  }
 
   return (
     <div>
       <div className="wrapper">
         <QrScanner
           onDecode={onDecode}
-          onError={(error) => console.error(error)}
+          onError={(error) => console.log(error)}
           containerStyle={{ height: "100%" }}
-          
         />
         <Popup
-          visible={showSuccess}
-          onMaskClick={() => setShowSuccess(false)}
-          onClose={() => setShowSuccess(false)}
+          visible={!!decodeResult}
+          onMaskClick={() => setDecodeResult(null)}
+          onClose={() => setDecodeResult(null)}
           bodyStyle={{
             height: "100vh",
             padding: "12px",
@@ -36,16 +51,16 @@ export const QRScan: FC = () => {
           <div className="successMaskContent">
             <Grid columns={1} gap={12} className="successMaskContentInner">
               <CheckCircleFill fontSize={96} color="#bea78c" />
-              <h2>Success</h2>
-              <div>{`Scan succeeded. You will be receive your ArchiPro Point rewards soon.`}</div>
+              <div>{`You are about to check in to`}</div>
+              <h2>{decodeResult?.data.professional.title}</h2>
             </Grid>
             <Button
-              onClick={() => navigate("/")}
+              onClick={() => onCheckIn("/")}
               block
               color="primary"
               size="large"
             >
-              Continue
+              Check In
             </Button>
           </div>
         </Popup>

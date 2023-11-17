@@ -1,6 +1,21 @@
-.benefitCardImage{
-    height: 150px;
-    align-items: center;
-    display: flex;
-    justify-content: center;
+.benefitCardImage {
+  height: 150px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.disabledMask {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.3);
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
 }
