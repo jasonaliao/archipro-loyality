@@ -1,0 +1,51 @@
+.card {
+    
+    color: white;
+    background: #1c1c1c;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+  
+  .card-header h1 {
+    font-size: 24px;
+    margin-bottom: 8px;
+    
+  }
+  
+  .member-status p {
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 0.5em;
+  }
+  
+  .member-status span {
+    display: block;
+    font-size: 16px;
+    text-transform: uppercase;
+  }
+  
+  .points {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .points span {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  button {
+    background-color: #000;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
