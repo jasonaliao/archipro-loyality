@@ -21,8 +21,8 @@ export const QRScan: FC = () => {
   const dispatch = useUserDispatch();
 
   const onDecode = (result: string) => {
-    // do action
-    setDecodeResult({ data: { professional: { id: 1, title: "FORTE" } } });
+    const decodedQrCode = JSON.parse(result);
+    setDecodeResult({ data: { professional: { id: decodedQrCode.id || 1, title: decodedQrCode.title || 'Archipro' } } });
   };
 
   const onCheckIn = (callBackUrl:string) => {
